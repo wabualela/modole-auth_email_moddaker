@@ -25,4 +25,4 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Email-based self-registration';
+$string['pluginname'] = 'Email-based self-registration Moddaker';
