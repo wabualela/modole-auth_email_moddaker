@@ -26,7 +26,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->libdir . '/authlib.php');
+require_once "$CFG->libdir/authlib.php";
+require_once "$CFG->dirroot/auth/email_moddaker/signup_form.php";
+
 
 /**
  * Authentication plugin auth_email_moddaker
@@ -89,9 +91,19 @@ class auth_plugin_email_moddaker extends auth_plugin_base {
      * @param object $user new user object
      * @param boolean $notify print notice with link and terminate
      */
-    function user_signup($user, $notify = true) {
+    public function user_signup($user, $notify = true) {
+        $user->username = core_text::strtolower($user->email);
         // Standard signup, without custom confirmatinurl.
         return $this->user_signup_with_confirmation($user, $notify);
+    }
+
+    /**
+     * Return a form to capture user details for account creation.
+     * This is used in /login/signup.php.
+     * @return moodleform A form which edits a record from the user table.
+     */
+    public function signup_form() {
+        return new login_signup_form(null, null, 'post', '', array('autocomplete' => 'on'));
     }
 
     /**

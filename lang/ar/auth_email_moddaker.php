@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * English language pack for Email moddaker
+ * Strings for component 'auth_email_moddaker', language 'ar'
  *
  * @package    auth_email_moddaker
  * @category   string
@@ -25,18 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname']    = 'Email-based self-registration Moddaker';
-$string['gender']        = 'Gender';
-$string['missinggender'] = 'Missing gender';
-$string['selectgender']  = 'Select gender';
-$string['male']          = 'Male';
-$string['female']        = 'Female';
-
-$string['nationality'] = 'Nationality';
-$string['missingnationality'] = 'Missing Nationality';
-$string['dob'] = 'Data of birth';
-$string['missingdob'] = 'missing Data of birth';
-$string['missingcountry'] = 'missing Country';
-
-$string['missingphone'] = 'missing Phone';
-$string['invalidphone'] = 'Please enter a valid phone number with country code.';
+$string['pluginname']    = 'تسجيل ذاتي عبر البريد الإلكتروني موددكر';
+$string['gender']        = 'الجنس';
+$string['missinggender'] = 'الجنس مطلوب';
+$string['selectgender']  = 'اختر الجنس';
+$string['male']          = 'ذكر';
+$string['female']        = 'أنثى';
