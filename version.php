@@ -28,5 +28,5 @@ $plugin->component    = 'auth_email_moddaker';
 $plugin->release      = '1.0';
 $plugin->version      = 2025021100;
 $plugin->requires     = 2024100700;
-$plugin->supported    = [405, 405];
+$plugin->supported    = [401, 405];
 $plugin->maturity     = MATURITY_STABLE;
