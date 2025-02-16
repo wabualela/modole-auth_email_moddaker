@@ -27,6 +27,6 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->component    = 'auth_email_moddaker';
 $plugin->release      = '1.0';
 $plugin->version      = 2025021100;
-$plugin->requires     = 2024100700;
-$plugin->supported    = [401, 405];
+$plugin->requires     = 2022112800;
+$plugin->supported    = [400, 405];
 $plugin->maturity     = MATURITY_STABLE;
