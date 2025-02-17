@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * English language pack for Email moddaker
+ * indonis language pack for Email moddaker
  *
  * @package    auth_email_moddaker
  * @category   string
