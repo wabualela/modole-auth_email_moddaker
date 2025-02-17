@@ -25,9 +25,25 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname']    = 'تسجيل ذاتي عبر البريد الإلكتروني موددكر';
+$string['pluginname']    = 'التسجيل الذاتي عبر البريد الإلكتروني - مدكر';
+
 $string['gender']        = 'الجنس';
-$string['missinggender'] = 'الجنس مطلوب';
+$string['missinggender'] = 'الرجاء اختيار الجنس';
 $string['selectgender']  = 'اختر الجنس';
 $string['male']          = 'ذكر';
 $string['female']        = 'أنثى';
+
+$string['nationality'] = 'الجنسية';
+$string['missingnationality'] = 'الرجاء اختيار الجنسية';
+
+$string['dob'] = 'تاريخ الميلاد';
+$string['missingdob'] = 'الرجاء إدخال تاريخ الميلاد';
+
+$string['missingcountry'] = 'الرجاء اختيار الدولة';
+
+$string['missingphone'] = 'الرجاء إدخال رقم الهاتف';
+$string['invalidphone'] = 'الرجاء إدخال رقم هاتف صحيح مع رمز الدولة';
+
+$string['certname'] = 'الاسم الكامل (كما سيظهر في الشهادة)';
+$string['missingcertname'] = 'الرجاء إدخال اسم الشهادة';
+$string['invalidcertname'] = 'الرجاء إدخال اسم شهادة صحيح';

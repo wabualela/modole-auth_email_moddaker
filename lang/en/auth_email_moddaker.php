@@ -26,6 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname']    = 'Email-based self-registration Moddaker';
+
 $string['gender']        = 'Gender';
 $string['missinggender'] = 'Missing gender';
 $string['selectgender']  = 'Select gender';
@@ -34,9 +35,15 @@ $string['female']        = 'Female';
 
 $string['nationality'] = 'Nationality';
 $string['missingnationality'] = 'Missing Nationality';
+
 $string['dob'] = 'Data of birth';
 $string['missingdob'] = 'missing Data of birth';
+
 $string['missingcountry'] = 'missing Country';
 
 $string['missingphone'] = 'missing Phone';
 $string['invalidphone'] = 'Please enter a valid phone number with country code.';
+
+$string['certname'] = 'Certificate Name';
+$string['missingcertname'] = 'Missing Certificate Name';
+$string['invalidcertname'] = 'Please enter a valid Certificate name.';
