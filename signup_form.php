@@ -47,9 +47,9 @@ class login_signup_form extends moodleform implements renderable, templatable {
             $mform->addRule($field, get_string($stringid), 'required', null, 'client');
         }
 
-        $mform->addElement('text', 'profile_field_certname', get_string('certname', 'auth_email_moddaker'), 'maxlength="100" class="col-md-12"');
-        $mform->addRule('profile_field_certfullname', get_string('missingcertname','auth_email_moddaker'), 'required', null, 'client');
-        $mform->addRule('profile_field_certname', get_string('invalidcertname', 'auth_email_moddaker'), 'regex', '/^[\p{L}\s\'-]+$/u', 'client');
+        $mform->addElement('text', 'profile_field_certname', get_string('certfullname', 'auth_email_moddaker'), 'maxlength="100" class="col-md-12"');
+        $mform->addRule('profile_field_certfullname', get_string('missingcertfullname','auth_email_moddaker'), 'required', null, 'client');
+        $mform->addRule('profile_field_certname', get_string('invalidcertfullname', 'auth_email_moddaker'), 'regex', '/^[\p{L}\s\'-]+$/u', 'client');
         $mform->setForceLtr('profile_field_certname');
         
         $mform->addElement('html', '<div class="col-md-4">');
