@@ -40,9 +40,10 @@ $string['missingdob'] = 'تاریخ پیدائش غائب ہے';
 
 $string['missingcountry'] = 'ملک غائب ہے';
 
-$string['missingphone'] = 'فون نمبر غائب ہے';
-$string['invalidphone'] = 'براہ کرم ملکی کوڈ کے ساتھ درست فون نمبر درج کریں۔';
+$string['phonenumber']        = 'فون نمبر (مثال +966501234567)';
+$string['missingphonenumber'] = 'فون نمبر غائب ہے';
+$string['invalidphonenumber'] = 'براہ کرم ملک کے کوڈ کے ساتھ درست فون نمبر درج کریں';
 
-$string['certname'] = 'وہ نام جو سرٹیفکیٹ پر لکھنا چاہتے ہیں';
-$string['missingcertname'] = 'سرٹیفکیٹ کا نام غائب ہے';
-$string['invalidcertname'] = 'براہ کرم درست سرٹیفکیٹ کا نام درج کریں۔';
+$string['certfullname']        = 'سرٹیفکیٹ پر ظاہر ہونے والا مکمل نام';
+$string['missingcertfullname'] = 'سرٹیفکیٹ کا مکمل نام غائب ہے';
+$string['invalidcertfullname'] = 'براہ کرم درست سرٹیفکیٹ مکمل نام درج کریں';

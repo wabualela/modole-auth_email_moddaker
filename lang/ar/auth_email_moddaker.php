@@ -41,9 +41,10 @@ $string['missingdob'] = 'الرجاء إدخال تاريخ الميلاد';
 
 $string['missingcountry'] = 'الرجاء اختيار الدولة';
 
-$string['missingphone'] = 'الرجاء إدخال رقم الهاتف';
-$string['invalidphone'] = 'الرجاء إدخال رقم هاتف صحيح مع رمز الدولة';
+$string['phonenumber']        = 'رقم الهاتف (مثال: +966501234567)';
+$string['missingphonenumber'] = 'الرجاء إدخال رقم الهاتف';
+$string['invalidphonenumber'] = 'الرجاء إدخال رقم هاتف صحيح مع رمز الدولة';
 
-$string['certname'] = 'الاسم الكامل (كما سيظهر في الشهادة)';
-$string['missingcertname'] = 'الرجاء إدخال اسم الشهادة';
-$string['invalidcertname'] = 'الرجاء إدخال اسم شهادة صحيح';
+$string['certfullname']        = 'الاسم الكامل الذي سيظهر في الشهادة';
+$string['missingcertfullname'] = 'الرجاء إدخال الاسم الكامل للشهادة';
+$string['invalidcertfullname'] = 'الرجاء إدخال اسم صحيح للشهادة';
