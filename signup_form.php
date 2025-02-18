@@ -80,7 +80,7 @@ class login_signup_form extends moodleform implements renderable, templatable {
         $mform->addElement('text', 'phone1', get_string('phonenumber', 'auth_email_moddaker'), 'maxlength="20" class="col-md-6"');
         $mform->setType('phone1', core_user::get_property_type('phone1'));
         $mform->addRule('phone1', get_string('missingphonenumber', 'auth_email_moddaker'), 'required', null, 'client');
-        $mform->addRule('phone1', get_string('invalidphonenumber', 'auth_email_moddaker'), 'regex', '/^\+?[1-9]\d{9,14}$/', 'client');
+        $mform->addRule('phone1', get_string('invalidphonenumber', 'auth_email_moddaker'), 'regex', '/^(?:\+?[1-9]\d{9,14}|0\d{7,10})$/', 'client');
         $mform->setForceLtr('phone1');    
 
         $mform->addElement('password', 'password', get_string('password'), [
