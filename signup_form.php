@@ -162,8 +162,8 @@ class login_signup_form extends moodleform implements renderable, templatable {
         }
 
          // Validate phone number (assuming it's stored in 'phone1' field)
-        if (!preg_match('/^\+?[1-9]\d{9,14}$/', $data['phone1'])) {
-            $errors['phone1'] = get_string('invalidphone', 'auth_email_moddaker');
+        if (!preg_match('/^(?:\+?[1-9]\d{9,14}|0\d{7,10})$/', $data['phone1'])) {
+            $errors['phone1'] = get_string('invalidphonenumber', 'auth_email_moddaker');
         }
 
         if (signup_captcha_enabled()) {
