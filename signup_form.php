@@ -58,12 +58,14 @@ class login_signup_form extends moodleform implements renderable, templatable {
         
         $options = array(
             'startyear' => 1950,
-            'stopyear'  => 2015,
+            'stopyear'  => 2025,
             'timezone'  => 99,
             'optional'  => false
         );
         $mform->addElement('html', '<div class="col-md-8">');
         $mform->addElement('date_selector', 'profile_field_dob', get_string('dob', 'auth_email_moddaker'), $options);
+        $mform->setType('profile_field_dob', PARAM_INT);
+        $mform->setDefault('profile_field_dob', time());
         $mform->addRule('profile_field_dob', get_string('missingdob', 'auth_email_moddaker'), 'required', null, 'client');        // $mform->addElement('html', '</div');
         $mform->addElement('html', '</div>');
     
