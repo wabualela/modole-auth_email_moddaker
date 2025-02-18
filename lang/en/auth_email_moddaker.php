@@ -36,7 +36,7 @@ $string['female']        = 'Female';
 $string['nationality']        = 'Nationality';
 $string['missingnationality'] = 'Missing Nationality';
 
-$string['dob']        = 'Data of birth';
+$string['dob']        = 'Date of birth';
 $string['missingdob'] = 'missing Data of birth';
 
 $string['missingcountry'] = 'missing Country';
