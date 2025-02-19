@@ -87,7 +87,7 @@ class login_signup_form extends moodleform implements renderable, templatable {
 
         $mform->addElement('password', 'password', get_string('password'), [
             'class' => 'col-md-6',
-            'autocomplete' => 'new-password'
+            'autocomplete' => 'new-password',
         ]);
         $mform->setType('password', core_user::get_property_type('password'));
         $mform->addRule('password', get_string('missingpassword'), 'required', null, 'client');
@@ -163,6 +163,13 @@ class login_signup_form extends moodleform implements renderable, templatable {
          // Validate phone number (assuming it's stored in 'phone1' field)
         if (!preg_match('/^(?:\+?[1-9]\d{9,14}|0\d{7,10})$/', $data['phone1'])) {
             $errors['phone1'] = get_string('invalidphonenumber', 'auth_email_moddaker');
+        }
+
+        // Validate date of birth (must be at least 7 years old)
+        $dob = $data['profile_field_dob'];
+        $minage = strtotime('-7 years');
+        if ($dob > $minage) {
+            $errors['profile_field_dob'] = get_string('tooyoung', 'auth_email_moddaker', 7);
         }
 
         if (signup_captcha_enabled()) {

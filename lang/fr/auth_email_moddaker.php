@@ -48,3 +48,5 @@ $string['invalidphonenumber'] = 'Veuillez saisir un numéro de téléphone valid
 $string['certfullname']        = 'Le nom complet qui apparaîtra sur le certificat';
 $string['missingcertfullname'] = 'Nom complet du certificat manquant';
 $string['invalidcertfullname'] = 'Veuillez saisir un nom complet valide pour le certificat.';
+
+$string['tooyoung'] = 'Vous devez avoir au moins {$a} ans pour vous inscrire sur ce site.';

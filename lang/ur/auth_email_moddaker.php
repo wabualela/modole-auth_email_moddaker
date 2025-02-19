@@ -47,3 +47,5 @@ $string['invalidphonenumber'] = 'براہ کرم ملک کے کوڈ کے سات�
 $string['certfullname']        = 'سرٹیفکیٹ پر ظاہر ہونے والا مکمل نام';
 $string['missingcertfullname'] = 'سرٹیفکیٹ کا مکمل نام غائب ہے';
 $string['invalidcertfullname'] = 'براہ کرم درست سرٹیفکیٹ مکمل نام درج کریں';
+
+$string['tooyoung'] = 'آپ کو اس سائٹ پر رجسٹر ہونے کے لئے کم از کم {$a} سال کی عمر ہونی چاہئے';

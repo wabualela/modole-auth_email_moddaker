@@ -48,3 +48,8 @@ $string['invalidphonenumber'] = 'Please enter a valid phone number with country 
 $string['certfullname']        = 'The full name that will appear in the certificate';
 $string['missingcertfullname'] = 'Missing Certificate Full Name';
 $string['invalidcertfullname'] = 'Please enter a valid Certificate full name.';
+
+$string['cohortid']      = 'Default Cohort';
+$string['cohortid_desc'] = 'Select the cohort to which users should be added after signup.';
+
+$string['tooyoung'] = 'You must be at least {$a} years old to register on this site.';

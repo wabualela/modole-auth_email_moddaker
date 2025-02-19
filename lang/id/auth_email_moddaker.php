@@ -48,3 +48,5 @@ $string['invalidphonenumber'] = 'Mohon masukkan nomor telepon yang valid dengan 
 $string['certfullname']        = 'Nama lengkap yang akan muncul di sertifikat';
 $string['missingcertfullname'] = 'Nama lengkap sertifikat tidak diisi';
 $string['invalidcertfullname'] = 'Mohon masukkan nama lengkap yang valid untuk sertifikat.';
+
+$string['tooyoung'] = 'Anda harus berusia minimal {$a} tahun untuk mendaftar di situs ini.';
