@@ -29,89 +29,95 @@ require_once "$CFG->dirroot/user/profile/lib.php";
 require_once "$CFG->dirroot/user/editlib.php";
 require_once "$CFG->dirroot/auth/email_moddaker/lib.php";
 
-class login_signup_form extends moodleform implements renderable, templatable {
+class moddaker_signup_form extends moodleform implements renderable, templatable {
     public function definition() {
-        global $USER, $CFG;
+        global $CFG;
 
         $mform = $this->_form;
-        $mform->updateAttributes(['class' => 'row']);
 
         $namefields = useredit_get_required_name_fields();
         foreach ($namefields as $field) {
-            $mform->addElement('text', $field, get_string($field), 'maxlength="100" class="col-md-6"');
+            $mform->addElement('text', $field, get_string($field), 'maxlength="100"');
             $mform->setType($field, core_user::get_property_type('firstname'));
             $stringid = 'missing' . $field;
-            if (! get_string_manager()->string_exists($stringid, 'moodle')) {
+            if (!get_string_manager()->string_exists($stringid, 'moodle')) {
                 $stringid = 'required';
             }
             $mform->addRule($field, get_string($stringid), 'required', null, 'client');
         }
 
-        $mform->addElement('text', 'profile_field_certfullname', get_string('certfullname', 'auth_email_moddaker'), 'maxlength="100" class="col-md-12"');
-        $mform->addRule('profile_field_certfullname', get_string('missingcertfullname','auth_email_moddaker'), 'required', null, 'client');
-        $mform->addRule('profile_field_certfullname', get_string('invalidcertfullname', 'auth_email_moddaker'), 'regex', '/^[\p{L}\s\'-]+$/u', 'client');
-        $mform->setForceLtr('profile_field_certfullname');
-        
-        $mform->addElement('html', '<div class="col-md-4">');
-        auth_email_moddaker_fields_by_shortnames($mform, ['gender']);
-        $mform->addElement('html', '</div>');
-        
-        $options = array(
-            'startyear' => 1950,
-            'stopyear'  => 2025,
-            'timezone'  => 99,
-            'optional'  => false
-        );
-        $mform->addElement('html', '<div class="col-md-8">');
-        $mform->addElement('date_selector', 'profile_field_dob', get_string('dob', 'auth_email_moddaker'), $options);
-        $mform->setType('profile_field_dob', PARAM_INT);
-        $mform->setDefault('profile_field_dob', time());
-        $mform->addRule('profile_field_dob', get_string('missingdob', 'auth_email_moddaker'), 'required', null, 'client');        // $mform->addElement('html', '</div');
-        $mform->addElement('html', '</div>');
-    
-        $mform->addElement('text', 'email', get_string('email'), 'maxlength="100" class="col-md-6"');
+        $mform->addElement('text', 'email', get_string('email'), 'maxlength="100" size="25"');
         $mform->setType('email', core_user::get_property_type('email'));
         $mform->addRule('email', get_string('missingemail'), 'required', null, 'client');
         $mform->setForceLtr('email');
 
-        $mform->addElement('text', 'email2', get_string('emailagain'), 'maxlength="100" class="col-md-6"');
+        $mform->addElement('text', 'email2', get_string('emailagain'), 'maxlength="100" size="25"');
         $mform->setType('email2', core_user::get_property_type('email'));
         $mform->addRule('email2', get_string('missingemail'), 'required', null, 'client');
         $mform->setForceLtr('email2');
 
-        $mform->addElement('text', 'phone1', get_string('phonenumber', 'auth_email_moddaker'), 'maxlength="20" class="col-md-6"');
+        if (!empty($CFG->passwordpolicy)) {
+            $mform->addElement('static', 'passwordpolicyinfo', '', print_password_policy());
+        }
+
+        $mform->addElement('text', 'phone1', get_string('phone1'), [
+            'type'         => "tel",
+            'maxlength'    => "20",
+            'size'         => "25",
+            'autocomplete' => "tel",
+            'pattern'      => '[0-9]*',
+        ]);
         $mform->setType('phone1', core_user::get_property_type('phone1'));
-        $mform->addRule('phone1', get_string('missingphonenumber', 'auth_email_moddaker'), 'required', null, 'client');
-        $mform->addRule('phone1', get_string('invalidphonenumber', 'auth_email_moddaker'), 'regex', '/^(?:\+?[1-9]\d{9,14}|0\d{7,10})$/', 'client');
-        $mform->setForceLtr('phone1');    
+        $mform->setForceLtr('phone1');
+        $mform->addRule('phone1', 'missingphone', 'required', null, 'client');
+        $mform->addRule('phone1', 'missingphone', 'numeric', null, 'client');
 
         $mform->addElement('password', 'password', get_string('password'), [
-            'class' => 'col-md-6',
+            'maxlength'    => MAX_PASSWORD_CHARACTERS,
+            'size'         => 30,
             'autocomplete' => 'new-password',
         ]);
         $mform->setType('password', core_user::get_property_type('password'));
         $mform->addRule('password', get_string('missingpassword'), 'required', null, 'client');
+        $mform->addRule(
+            'password',
+            get_string('maximumchars', '', MAX_PASSWORD_CHARACTERS),
+            'maxlength',
+            MAX_PASSWORD_CHARACTERS,
+            'client'
+        );
 
         $country             = get_string_manager()->get_list_of_countries();
         $default_country[''] = get_string('selectacountry');
         $country             = array_merge($default_country, $country);
-        $mform->addElement('select', 'profile_field_nationality', get_string('nationality', 'auth_email_moddaker'), $country, 'class="col-md-6"');
-        $mform->addRule('profile_field_nationality', get_string('missingnationality', 'auth_email_moddaker'), 'required', null, 'client');
-        $mform->setDefault('profile_field_nationality', ''); // Set empty default to force selection
+        $mform->addElement('select', 'country', get_string('country'), $country);
+        $mform->addRule('country', get_string('missingpassword'), 'required', null, 'client');
 
-        $country             = get_string_manager()->get_list_of_countries();
-        $default_country[''] = get_string('selectacountry');
-        $country             = array_merge($default_country, $country);
-        $mform->addElement('select', 'country', get_string('country'), $country, 'class="col-md-6"');
-        $mform->addRule('country', get_string('missingcountry', 'auth_email_moddaker'), 'required', null, 'client');
-
-        if (! empty($CFG->country)) {
+        if (!empty($CFG->country)) {
             $mform->setDefault('country', $CFG->country);
         } else {
             $mform->setDefault('country', '');
         }
 
-       // Hook for plugins to extend form definition.
+        $mform->addElement('text', 'city', get_string('city'), 'maxlength="120" size="30"');
+        $mform->setType('city', core_user::get_property_type('city'));
+        if (!empty($CFG->defaultcity)) {
+            $mform->setDefault('city', $CFG->defaultcity);
+        }
+
+        if ($fields = profile_get_signup_fields()) {
+            foreach ($fields as $field) {
+                // Check if we change the categories.
+                if (!isset($currentcat) || $currentcat != $field->categoryid) {
+                    $currentcat = $field->categoryid;
+                    $mform->addElement('header', 'category_' . $field->categoryid, format_string($field->categoryname));
+                }
+                ;
+                $field->object->edit_field($mform);
+            }
+        }
+
+        // Hook for plugins to extend form definition.
         core_login_extend_signup_form($mform);
 
         // Add "Agree to sitepolicy" controls. By default it is a link to the policy text and a checkbox but
@@ -121,7 +127,7 @@ class login_signup_form extends moodleform implements renderable, templatable {
 
         $manager = new \core_privacy\local\sitepolicy\manager();
         if ($manager->is_defined()) {
-            $mform->addElement('checkbox', 'sitepolicyagree', '', '<a href="' . $manager->get_redirect_url() . '">' . get_string('policyagreementclick') . '</a>','class="col-md-12"');
+            $mform->addElement('checkbox', 'sitepolicyagree', '', '<a href="' . $manager->get_redirect_url() . '">' . get_string('policyagreementclick') . '</a>', 'class="col-md-12"');
             $mform->addRule('sitepolicyagree', get_string('required'), 'required', null, 'client');
         }
         $manager->signup_form($mform);
@@ -133,6 +139,8 @@ class login_signup_form extends moodleform implements renderable, templatable {
     }
 
     function definition_after_data() {
+        global $PAGE;
+
         $mform = $this->_form;
         $mform->applyFilter('email', 'trim');
 
@@ -140,6 +148,8 @@ class login_signup_form extends moodleform implements renderable, templatable {
         foreach (useredit_get_required_name_fields() as $field) {
             $mform->applyFilter($field, 'trim');
         }
+
+        $PAGE->requires->js_call_amd('auth_email_moddaker/intl-tel-input', 'init', [ '#id_phone1' ]);
     }
 
     /**
@@ -156,27 +166,27 @@ class login_signup_form extends moodleform implements renderable, templatable {
         // Extend validation for any form extensions from plugins.
         // $errors = array_merge($errors, auth_email_moddaker_validate_extend_signup_form($data));
 
-        if ($data['profile_field_gender'] == 0) {
-            $errors['profile_field_gender'] = get_string('missinggender', 'auth_email_moddaker');
-        }
+        // if ($data['profile_field_gender'] == 0) {
+        //     $errors['profile_field_gender'] = get_string('missinggender', 'auth_email_moddaker');
+        // }
 
-         // Validate phone number (assuming it's stored in 'phone1' field)
-        if (!preg_match('/^(?:\+?[1-9]\d{9,14}|0\d{7,10})$/', $data['phone1'])) {
-            $errors['phone1'] = get_string('invalidphonenumber', 'auth_email_moddaker');
-        }
+        // Validate phone number (assuming it's stored in 'phone1' field)
+        // if (!preg_match('/^(?:\+?[1-9]\d{9,14}|0\d{7,10})$/', $data['phone1'])) {
+        //     $errors['phone1'] = get_string('invalidphonenumber', 'auth_email_moddaker');
+        // }
 
         // Validate date of birth (must be at least 7 years old)
-        $dob = $data['profile_field_dob'];
-        $minage = strtotime('-7 years');
-        if ($dob > $minage) {
-            $errors['profile_field_dob'] = get_string('tooyoung', 'auth_email_moddaker', 7);
-        }
+        // $dob    = $data['profile_field_dob'];
+        // $minage = strtotime('-7 years');
+        // if ($dob > $minage) {
+        //     $errors['profile_field_dob'] = get_string('tooyoung', 'auth_email_moddaker', 7);
+        // }
 
         if (signup_captcha_enabled()) {
             $recaptchaelement = $this->_form->getElement('recaptcha_element');
-            if (! empty($this->_form->_submitValues['g-recaptcha-response'])) {
+            if (!empty($this->_form->_submitValues['g-recaptcha-response'])) {
                 $response = $this->_form->_submitValues['g-recaptcha-response'];
-                if (! $recaptchaelement->verify($response)) {
+                if (!$recaptchaelement->verify($response)) {
                     $errors['recaptcha_element'] = get_string('incorrectpleasetryagain', 'auth');
                 }
             } else {
@@ -184,7 +194,7 @@ class login_signup_form extends moodleform implements renderable, templatable {
             }
         }
 
-        $errors += auth_email_moddaker_signup_validate_data($data, $files);
+        $errors  += auth_email_moddaker_signup_validate_data($data, $files);
 
         return $errors;
     }
@@ -201,7 +211,7 @@ class login_signup_form extends moodleform implements renderable, templatable {
         $formhtml = ob_get_contents();
         ob_end_clean();
         $context = [
-            'formhtml' => $formhtml
+            'formhtml' => $formhtml,
         ];
         return $context;
     }

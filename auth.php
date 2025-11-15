@@ -92,6 +92,8 @@ class auth_plugin_email_moddaker extends auth_plugin_base {
      * @param boolean $notify print notice with link and terminate
      */
     public function user_signup($user, $notify = true) {
+
+        die('hi');
         $user->username = core_text::strtolower($user->email);
         // Standard signup, without custom confirmatinurl.
         return $this->user_signup_with_confirmation($user, $notify);
@@ -103,7 +105,7 @@ class auth_plugin_email_moddaker extends auth_plugin_base {
      * @return moodleform A form which edits a record from the user table.
      */
     public function signup_form() {
-        return new login_signup_form(null, null, 'post', '', array('autocomplete' => 'on'));
+        return new moddaker_signup_form(null, null, 'post', '', array('autocomplete' => 'on'));
     }
 
     /**
@@ -138,14 +140,14 @@ class auth_plugin_email_moddaker extends auth_plugin_base {
         profile_save_data($user);
 
         // Save wantsurl against user's profile, so we can return them there upon confirmation.
-        if (! empty($SESSION->wantsurl)) {
+        if (!empty($SESSION->wantsurl)) {
             set_user_preference('auth_email_wantsurl', $SESSION->wantsurl, $user);
         }
 
         // Trigger event.
         \core\event\user_created::create_from_userid($user->id)->trigger();
 
-        if (! send_confirmation_email($user, $confirmationurl)) {
+        if (!send_confirmation_email($user, $confirmationurl)) {
             throw new \moodle_exception('auth_emailnoemail', 'auth_email');
         }
 
@@ -181,7 +183,7 @@ class auth_plugin_email_moddaker extends auth_plugin_base {
         global $DB, $SESSION;
         $user = get_complete_user_data('username', $username);
 
-        if (! empty($user)) {
+        if (!empty($user)) {
             if ($user->auth != $this->authtype) {
                 return AUTH_CONFIRM_ERROR;
 
