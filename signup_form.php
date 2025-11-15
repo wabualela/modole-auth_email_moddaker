@@ -35,9 +35,14 @@ class moddaker_signup_form extends moodleform implements renderable, templatable
 
         $mform = $this->_form;
 
+        $mform->updateAttributes([
+            'id'    => 'signupform',
+            'class' => 'mform signupform row',
+        ]);
+
         $namefields = useredit_get_required_name_fields();
         foreach ($namefields as $field) {
-            $mform->addElement('text', $field, get_string($field), 'maxlength="100"');
+            $mform->addElement('text', $field, get_string($field), 'maxlength="100" class="col-md-6"');
             $mform->setType($field, core_user::get_property_type('firstname'));
             $stringid = 'missing' . $field;
             if (!get_string_manager()->string_exists($stringid, 'moodle')) {
@@ -46,12 +51,12 @@ class moddaker_signup_form extends moodleform implements renderable, templatable
             $mform->addRule($field, get_string($stringid), 'required', null, 'client');
         }
 
-        $mform->addElement('text', 'email', get_string('email'), 'maxlength="100" size="25"');
+        $mform->addElement('text', 'email', get_string('email'), 'maxlength="100" size="25" class="col-md-6"');
         $mform->setType('email', core_user::get_property_type('email'));
         $mform->addRule('email', get_string('missingemail'), 'required', null, 'client');
         $mform->setForceLtr('email');
 
-        $mform->addElement('text', 'email2', get_string('emailagain'), 'maxlength="100" size="25"');
+        $mform->addElement('text', 'email2', get_string('emailagain'), 'maxlength="100" size="25" class="col-md-6"');
         $mform->setType('email2', core_user::get_property_type('email'));
         $mform->addRule('email2', get_string('missingemail'), 'required', null, 'client');
         $mform->setForceLtr('email2');
@@ -66,6 +71,7 @@ class moddaker_signup_form extends moodleform implements renderable, templatable
             'size'         => "25",
             'autocomplete' => "tel",
             'pattern'      => '[0-9]*',
+            'class'        => 'col-md-6',
         ]);
         $mform->setType('phone1', core_user::get_property_type('phone1'));
         $mform->setForceLtr('phone1');
@@ -76,6 +82,7 @@ class moddaker_signup_form extends moodleform implements renderable, templatable
             'maxlength'    => MAX_PASSWORD_CHARACTERS,
             'size'         => 30,
             'autocomplete' => 'new-password',
+            'class'        => 'col-md-6',
         ]);
         $mform->setType('password', core_user::get_property_type('password'));
         $mform->addRule('password', get_string('missingpassword'), 'required', null, 'client');
@@ -90,7 +97,7 @@ class moddaker_signup_form extends moodleform implements renderable, templatable
         $country             = get_string_manager()->get_list_of_countries();
         $default_country[''] = get_string('selectacountry');
         $country             = array_merge($default_country, $country);
-        $mform->addElement('select', 'country', get_string('country'), $country);
+        $mform->addElement('select', 'country', get_string('country'), $country, 'class="col-md-6"');
         $mform->addRule('country', get_string('missingpassword'), 'required', null, 'client');
 
         if (!empty($CFG->country)) {
@@ -99,7 +106,7 @@ class moddaker_signup_form extends moodleform implements renderable, templatable
             $mform->setDefault('country', '');
         }
 
-        $mform->addElement('text', 'city', get_string('city'), 'maxlength="120" size="30"');
+        $mform->addElement('text', 'city', get_string('city'), 'maxlength="120" size="30" class="col-md-6"');
         $mform->setType('city', core_user::get_property_type('city'));
         if (!empty($CFG->defaultcity)) {
             $mform->setDefault('city', $CFG->defaultcity);
