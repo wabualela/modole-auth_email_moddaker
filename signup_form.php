@@ -115,8 +115,6 @@ class moddaker_signup_form extends moodleform implements renderable, templatable
             $mform->setDefault('city', $CFG->defaultcity);
         }
 
-        auth_email_moddaker_fields_by_shortnames($mform, ['gender', 'dob', 'nationality', 'certificate_fullname']);
-
         // Hook for plugins to extend form definition.
         core_login_extend_signup_form($mform);
 
