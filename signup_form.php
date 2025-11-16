@@ -29,7 +29,8 @@ require_once "$CFG->dirroot/user/profile/lib.php";
 require_once "$CFG->dirroot/user/editlib.php";
 require_once "$CFG->dirroot/auth/email_moddaker/lib.php";
 
-class moddaker_signup_form extends moodleform implements renderable, templatable {
+class moddaker_signup_form extends moodleform implements renderable, templatable
+{
     public function definition() {
         global $CFG;
 
@@ -94,6 +95,8 @@ class moddaker_signup_form extends moodleform implements renderable, templatable
             'client'
         );
 
+        auth_email_moddaker_fields_by_shortnames($mform, ['gender', 'dob', 'nationality', 'certificate_fullname']);
+
         $country             = get_string_manager()->get_list_of_countries();
         $default_country[''] = get_string('selectacountry');
         $country             = array_merge($default_country, $country);
@@ -156,7 +159,7 @@ class moddaker_signup_form extends moodleform implements renderable, templatable
             $mform->applyFilter($field, 'trim');
         }
 
-        $PAGE->requires->js_call_amd('auth_email_moddaker/intl-tel-input', 'init', [ '#id_phone1' ]);
+        $PAGE->requires->js_call_amd('auth_email_moddaker/intl-tel-input', 'init', ['#id_phone1']);
     }
 
     /**
@@ -201,7 +204,7 @@ class moddaker_signup_form extends moodleform implements renderable, templatable
             }
         }
 
-        $errors  += auth_email_moddaker_signup_validate_data($data, $files);
+        $errors += auth_email_moddaker_signup_validate_data($data, $files);
 
         return $errors;
     }
