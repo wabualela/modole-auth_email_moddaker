@@ -115,18 +115,6 @@ class moddaker_signup_form extends moodleform implements renderable, templatable
             $mform->setDefault('city', $CFG->defaultcity);
         }
 
-        if ($fields = profile_get_signup_fields()) {
-            foreach ($fields as $field) {
-                // Check if we change the categories.
-                if (!isset($currentcat) || $currentcat != $field->categoryid) {
-                    $currentcat = $field->categoryid;
-                    $mform->addElement('header', 'category_' . $field->categoryid, format_string($field->categoryname));
-                }
-                ;
-                $field->object->edit_field($mform);
-            }
-        }
-
         // Hook for plugins to extend form definition.
         core_login_extend_signup_form($mform);
 
