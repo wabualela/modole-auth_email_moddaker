@@ -95,7 +95,7 @@ class moddaker_signup_form extends moodleform implements renderable, templatable
             'client'
         );
 
-        $mform->addElement('html', '<div class="col-md-6">');
+        $mform->addElement('html', '<div class="parent-profile-fields">');
         if ($fields = profile_get_signup_fields()) {
             foreach ($fields as $field) {
                 $field->object->edit_field($mform);
