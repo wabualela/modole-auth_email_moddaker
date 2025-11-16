@@ -46,7 +46,6 @@ function auth_email_moddaker_fields_by_shortnames(MoodleQuickForm $mform, array 
                 continue;
             }
             $field->object->field->defaultdata = $mform->_defaultValues['profile_field_' . $field->object->field->shortname] ?? null;
-            $field->object->field->class = 'col-md-6';
 
             $field->object->edit_field($mform);
         }
