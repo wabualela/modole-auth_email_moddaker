@@ -95,7 +95,11 @@ class moddaker_signup_form extends moodleform implements renderable, templatable
             'client'
         );
 
-        auth_email_moddaker_fields_by_shortnames($mform, ['gender', 'dob', 'nationality', 'certificate_fullname']);
+        if ($fields = profile_get_signup_fields()) {
+            foreach ($fields as $field) {
+                $field->object->edit_field($mform);
+            }
+        }
 
         $country             = get_string_manager()->get_list_of_countries();
         $default_country[''] = get_string('selectacountry');
