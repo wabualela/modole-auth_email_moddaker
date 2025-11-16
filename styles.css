@@ -1,5 +1,11 @@
 .parent-profile-fields {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
-    gap: 10px; /* spacing between children */
+    grid-template-columns: repeat(2, 1fr);
+    /* Two equal columns */
+    gap: 10px;
+    /* spacing between children */
+}
+
+.signupform {
+    max-width: 600px;
 }
