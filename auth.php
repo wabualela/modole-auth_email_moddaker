@@ -92,8 +92,6 @@ class auth_plugin_email_moddaker extends auth_plugin_base {
      * @param boolean $notify print notice with link and terminate
      */
     public function user_signup($user, $notify = true) {
-
-        die('hi');
         $user->username = core_text::strtolower($user->email);
         // Standard signup, without custom confirmatinurl.
         return $this->user_signup_with_confirmation($user, $notify);
