@@ -95,11 +95,13 @@ class moddaker_signup_form extends moodleform implements renderable, templatable
             'client'
         );
 
+        $mform->addElement('html', '<div class="col-md-6">');
         if ($fields = profile_get_signup_fields()) {
             foreach ($fields as $field) {
                 $field->object->edit_field($mform);
             }
         }
+        $mform->addElement('html', '</div>');
 
         $country             = get_string_manager()->get_list_of_countries();
         $default_country[''] = get_string('selectacountry');
